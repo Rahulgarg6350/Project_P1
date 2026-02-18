@@ -141,8 +141,3 @@ SELECT * FROM disaster_events;
 
 **Rahul Garg**
 
----
-
-## 📄 License
-
-This project is for educational purposes.

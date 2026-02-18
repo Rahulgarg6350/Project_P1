@@ -1,0 +1,6 @@
+region_id,region,population,area_sq_km
+101,Odisha,45000000.0,155707
+102,West Bengal,91000000.0,88752
+103,Assam,35000000.0,78438
+103,Assam,,78438
+104,Gujarat,60000000.0,196024

@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS Project1;
-USE project1;
+USE Project1;
 
 SELECT * FROM disaster_events LIMIT 10;
 SELECT * FROM regions LIMIT 10;

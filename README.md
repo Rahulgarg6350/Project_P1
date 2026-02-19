@@ -119,23 +119,6 @@ SELECT * FROM disaster_events;
 
 ---
 
-## ✅ Project Outcome
-
-* Cleaned and structured disaster datasets
-* Successfully stored data in MySQL tables
-* Demonstrated ETL pipeline workflow
-* Ready for further SQL analysis or visualization
-
----
-
-## 🚀 Future Improvements
-
-* Add data validation checks
-* Create automated ETL scripts
-* Implement dashboard visualization
-* Add advanced SQL analytics queries
-
----
 
 ## 📊 Dashboard Problem Statements (Matplotlib)
 

@@ -2,8 +2,7 @@
 
 ## 📌 Project Overview
 
-This project demonstrates a simple **ETL (Extract–Transform–Load)** pipeline using Python and MySQL.
-It loads disaster-related datasets from CSV files, cleans and preprocesses the data using Pandas, and stores the processed data into a MySQL database.
+This project demonstrates a simple ETL (Extract–Transform–Load) pipeline using Python and MySQL. It loads disaster-related datasets from CSV files, cleans and preprocesses the data using Pandas, and stores the processed data into a MySQL database.
 
 The goal of this project is to showcase:
 
@@ -18,9 +17,9 @@ The goal of this project is to showcase:
 
 The project uses the following CSV datasets:
 
-* `disaster_events.csv` — Contains disaster event details
-* `region.csv` — Contains region demographic information
-* `impact_assessment.csv` — Contains disaster impact statistics
+* **disaster_events.csv** — Contains disaster event details
+* **region.csv** — Contains region demographic information
+* **impact_assessment.csv** — Contains disaster impact statistics
 
 ---
 
@@ -30,6 +29,7 @@ The project uses the following CSV datasets:
 * Pandas
 * SQLAlchemy
 * MySQL
+* Matplotlib
 * Jupyter Notebook
 
 ---
@@ -38,13 +38,13 @@ The project uses the following CSV datasets:
 
 ### 1️⃣ Database Setup (MySQL)
 
-* Create a database:
+Create a database:
 
 ```sql
 CREATE DATABASE Project1;
 ```
 
-* Grant privileges (optional):
+Grant privileges (optional):
 
 ```sql
 GRANT ALL PRIVILEGES ON Project1.* 
@@ -60,7 +60,7 @@ FLUSH PRIVILEGES;
 Install required Python packages:
 
 ```bash
-pip install pandas sqlalchemy mysql-connector-python
+pip install pandas sqlalchemy mysql-connector-python matplotlib
 ```
 
 ---
@@ -119,11 +119,44 @@ SELECT * FROM disaster_events;
 
 ---
 
+## 📊 Dashboard Problem Statements (Matplotlib)
+
+### 🔹 1. Top 5 Regions by Total Affected Population
+
+![Top Regions](images/top5_regions.png)
+
+---
+
+### 🔹 2. Disaster Severity Distribution by Type
+
+![Severity Distribution](images/severity_distribution.png)
+
+---
+
+### 🔹 3. Trend of Disasters Over Time (Monthly)
+
+![Monthly Trend](images/monthly_trend.png)
+
+---
+
+### 🔹 4. Economic Loss vs Affected Population Scatter Plot
+
+![Scatter Plot](images/loss_vs_population.png)
+
+---
+
+### 🔹 5. Region-wise Disaster Frequency Heatmap
+
+![Heatmap](images/region_heatmap.png)
+
+---
+
 ## ✅ Project Outcome
 
 * Cleaned and structured disaster datasets
 * Successfully stored data in MySQL tables
 * Demonstrated ETL pipeline workflow
+* Generated visual dashboards for analytical insights
 * Ready for further SQL analysis or visualization
 
 ---
@@ -132,12 +165,11 @@ SELECT * FROM disaster_events;
 
 * Add data validation checks
 * Create automated ETL scripts
-* Implement dashboard visualization
+* Implement interactive dashboards (Plotly/Power BI)
 * Add advanced SQL analytics queries
 
 ---
 
 ## 👨‍💻 Author
 
-**Rahul Garg**
-
+Rahul Garg

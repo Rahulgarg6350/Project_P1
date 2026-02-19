@@ -34,87 +34,59 @@ The project uses the following CSV datasets:
 
 ---
 
-## ⚙️ Project Workflow
-
-### 1️⃣ Database Setup (MySQL)
-
-* Create a database:
-
-```sql
-CREATE DATABASE Project1;
-```
-
-* Grant privileges (optional):
-
-```sql
-GRANT ALL PRIVILEGES ON Project1.* 
-TO 'your_username'@'localhost';
-
-FLUSH PRIVILEGES;
-```
-
----
-
-### 2️⃣ Environment Setup
-
-Install required Python packages:
-
-```bash
-pip install pandas sqlalchemy mysql-connector-python
-```
-
----
-
-### 3️⃣ Extract — Load CSV Files
+### STEP 1 — Import & Load Data
 
 ```python
 import pandas as pd
+import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
 
 events = pd.read_csv("disaster_events.csv")
-regions = pd.read_csv("region.csv")
+regions = pd.read_csv("regions.csv")
 impact = pd.read_csv("impact_assessment.csv")
 ```
 
 ---
 
-### 4️⃣ Transform — Data Cleaning
-
-Example preprocessing:
+### STEP 2 — Data Cleaning
 
 ```python
-regions['population'] = regions['population'].fillna(regions['population'].median())
-impact['affected_people'] = impact['affected_people'].fillna(0)
-impact['economic_loss_musd'] = impact['economic_loss_musd'].fillna(0)
+events.drop_duplicates(inplace=True)
+regions.drop_duplicates(inplace=True)
+impact.drop_duplicates(inplace=True)
+
+events['event_date'] = pd.to_datetime(events['event_date'], errors='coerce')
+events.dropna(subset=['event_date'], inplace=True)
+
+regions['population'].fillna(regions['population'].median(), inplace=True)
+impact.fillna(0, inplace=True)
 ```
 
 ---
 
-### 5️⃣ Load — Connect to MySQL
+### STEP 3 — MySQL Connection
 
 ```python
-from sqlalchemy import create_engine
-
-engine = create_engine("mysql+mysqlconnector://username:password@localhost/Project1")
+engine = create_engine("mysql+pymysql://username:password@localhost/Project1")
 ```
 
 ---
 
-### 6️⃣ Write Data to MySQL Tables
+### STEP 4 — Load to Database
 
 ```python
-events.to_sql("disaster_events", engine, if_exists="replace", index=False)
-regions.to_sql("regions", engine, if_exists="replace", index=False)
-impact.to_sql("impact_assessment", engine, if_exists="replace", index=False)
+events.to_sql("disaster_events", engine, if_exists="replace")
+regions.to_sql("regions", engine, if_exists="replace")
+impact.to_sql("impact_assessment", engine, if_exists="replace")
 ```
 
 ---
 
-### 7️⃣ Verify Tables in MySQL
+### STEP 5 — Merge for Analysis
 
-```sql
-USE Project1;
-SHOW TABLES;
-SELECT * FROM disaster_events;
+```python
+df = events.merge(impact, on="event_id")\
+           .merge(regions, on="region", how="left")
 ```
 
 ---

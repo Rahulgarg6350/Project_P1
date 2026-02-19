@@ -1,73 +1,103 @@
-Disaster Affected Region Tracker Analysis
-📌 Project Overview
+# Disaster Affected Region Tracker Analysis
 
-This project demonstrates a simple ETL (Extract–Transform–Load) pipeline using Python and MySQL. It loads disaster-related datasets from CSV files, cleans and preprocesses the data using Pandas, and stores the processed data into a MySQL database.
+## 📌 Project Overview
 
-🎯 Project Goals
+This project demonstrates a simple **ETL (Extract–Transform–Load)** pipeline using Python and MySQL. It loads disaster-related datasets from CSV files, cleans and preprocesses the data using Pandas, and stores the processed data into a MySQL database.
 
-Data preprocessing with Python
+### 🎯 Project Goals
 
-Database connectivity using SQLAlchemy
+* Data preprocessing with Python
+* Database connectivity using SQLAlchemy
+* Loading structured data into MySQL tables
+* Demonstrating basic database integration workflow for analytics
 
-Loading structured data into MySQL tables
+---
 
-Demonstrating basic database integration workflow for analytics
-
-🗂 Dataset Files
+## 🗂 Dataset Files
 
 The project uses the following CSV datasets:
 
-disaster_events.csv — Contains disaster event details
+* `disaster_events.csv` — Contains disaster event details
+* `region.csv` — Contains region demographic information
+* `impact_assessment.csv` — Contains disaster impact statistics
 
-region.csv — Contains region demographic information
+---
 
-impact_assessment.csv — Contains disaster impact statistics
+## 🛠 Technologies Used
 
-🛠 Technologies Used
+* Python
+* Pandas
+* SQLAlchemy
+* MySQL
+* Jupyter Notebook
 
-Python
+---
 
-Pandas
+## ⚙️ Project Workflow
 
-SQLAlchemy
+### 1️⃣ Database Setup (MySQL)
 
-MySQL
-
-Jupyter Notebook
-
-⚙️ Project Workflow
-1️⃣ Database Setup (MySQL)
+```sql
 CREATE DATABASE Project1;
 
 GRANT ALL PRIVILEGES ON Project1.* 
 TO 'your_username'@'localhost';
 
 FLUSH PRIVILEGES;
-2️⃣ Environment Setup
+```
+
+---
+
+### 2️⃣ Environment Setup
 
 Install required Python packages:
 
+```bash
 pip install pandas sqlalchemy mysql-connector-python
-3️⃣ Extract — Load CSV Files
+```
+
+---
+
+### 3️⃣ Extract — Load CSV Files
+
+```python
 import pandas as pd
 
 events = pd.read_csv("disaster_events.csv")
 regions = pd.read_csv("region.csv")
 impact = pd.read_csv("impact_assessment.csv")
-4️⃣ Transform — Data Cleaning
+```
+
+---
+
+### 4️⃣ Transform — Data Cleaning
+
+```python
 regions['population'] = regions['population'].fillna(
     regions['population'].median()
 )
 
 impact['affected_people'] = impact['affected_people'].fillna(0)
 impact['economic_loss_musd'] = impact['economic_loss_musd'].fillna(0)
-5️⃣ Load — Connect to MySQL
+```
+
+---
+
+### 5️⃣ Load — Connect to MySQL
+
+```python
 from sqlalchemy import create_engine
 
 engine = create_engine(
     "mysql+mysqlconnector://username:password@localhost/Project1"
 )
-6️⃣ Write Data to MySQL Tables
+```
+
+---
+
+### 6️⃣ Write Data to MySQL Tables
+
+```python
 events.to_sql(
     "disaster_events",
     engine,
@@ -88,12 +118,26 @@ impact.to_sql(
     if_exists="replace",
     index=False
 )
-7️⃣ Verify Tables in MySQL
+```
+
+---
+
+### 7️⃣ Verify Tables in MySQL
+
+```sql
 USE Project1;
 
 SHOW TABLES;
 
 SELECT * FROM disaster_events;
+```
+
+---
+
+## ✅ Summary
+
+This project illustrates a complete ETL workflow by extracting CSV data, transforming it using Pandas, and loading it into a MySQL database. It demonstrates practical integration between Python data processing and relational database storage, making it suitable for analytics and reporting workflows.
+
 
 ## 📊 Dashboard Problem Statements (Matplotlib)
 
